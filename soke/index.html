@@ -26,7 +26,7 @@
         <div class="row">
             <h1 class="col-md-20 text-center">
                 <br></br>
-				Signs as Tokens: An Autoregressive Multilingual Sign Language Generator<br />
+				Signs as Tokens: A Retrieval-Enhanced Multilingual Sign Language Generator<br />
             </h1>
             <hr style="margin-top:0px">
         </div>
@@ -118,6 +118,11 @@
                             <h4><strong>Data (CSL-Daily)</strong></h4>
                         </a>
                     </li> 
+		    <li>
+                        <a href="https://2000zrl.github.io/soke/">
+                            <h4><strong>Data (Phoenix)</strong></h4>
+                        </a>
+                    </li>
                   <li>
                         <a href="https://2000zrl.github.io/soke">
                             <h4><strong>Code (upon publication)</strong></h4>
@@ -151,7 +156,7 @@
                 <hr style="margin-top:0px">
                 <img src="./teaser.png" class="img-responsive" alt="overview"><br>
                 <p class="text-justify" style="font-size: 16px;">
-                    In this paper, we propose Signs as Tokens (SOKE), a unified sign language generator that can produce multilingual signs from text inputs. (Left: Chinese sign language; Right: American sign language.)
+                    We propose Signs as Tokens (SOKE), a unified sign language generator that can produce multilingual signs from text inputs. (Left: American sign language; Middle: Chinese sign language; Right: German sign language.)
                 </p>
             </div>
         </div>
@@ -172,7 +177,7 @@
                 </h2>
                 <hr style="margin-top:0px">
                 <p class="text-justify" style="font-size: 16px;">
-                    Sign language is a visual language that encompasses all linguistic features of natural languages and serves as the primary communication method for the deaf and hard-of-hearing communities. While many studies have successfully adapted pretrained language models (LMs) for sign language translation (sign-to-text), drawing inspiration from its linguistic characteristics, the reverse task of sign language generation (SLG, text-to-sign) remains largely unexplored. Most existing approaches treat SLG as a visual content generation task, employing techniques such as diffusion models to produce sign videos, 2D keypoints, or 3D avatars based on text inputs, overlooking the linguistic properties of sign languages. In this work, we introduce a multilingual sign language model, Signs as Tokens (SOKE), which can generate 3D sign avatars autoregressively from text inputs using a pretrained LM. To align sign language with the LM, we develop a decoupled tokenizer that discretizes continuous signs into token sequences representing various body parts. These sign tokens are integrated into the raw text vocabulary of the LM, allowing for supervised fine-tuning on sign language datasets. To facilitate multilingual SLG research, we further curate a large-scale Chinese sign language dataset, CSL-Daily, with high-quality 3D pose annotations. Extensive qualitative and quantitative evaluations demonstrate the effectiveness of SOKE.
+                    Sign language is a visual language that encompasses all linguistic features of natural languages and serves as the primary communication method for the deaf and hard-of-hearing communities. Although many studies have successfully adapted pretrained language models (LMs) for sign language translation (sign-to-text), the reverse task—sign language generation (text-to-sign)—remains largely unexplored. In this work, we introduce a multilingual sign language model, Signs as Tokens (SOKE), which can generate 3D sign avatars autoregressively from text inputs using a pretrained LM. To align sign language with the LM, we leverage a decoupled tokenizer that discretizes continuous signs into token sequences representing various body parts. During decoding, unlike existing approaches that flatten all part-wise tokens into a single sequence and predict one token at a time, we propose a multi-head decoding method capable of predicting multiple tokens simultaneously. This approach improves inference efficiency while maintaining effective information fusion across different body parts. To further ease the generation process, we propose a retrieval-enhanced SLG approach, which incorporates external sign dictionaries to provide accurate word-level signs as auxiliary conditions, significantly improving the precision of generated signs. Extensive qualitative and quantitative evaluations demonstrate the effectiveness of SOKE. Code, models, and data will be made publicly available.
                 </p>
             </div>
         </div>
@@ -186,7 +191,7 @@
                 <hr style="margin-top:0px">
                 <img src="./overview.png" class="img-responsive" alt="overview"><br>
                 <p class="text-justify" style="font-size: 16px;">
-                    An overview of our proposed method, Signs as Tokens (SOKE). Our approach consists of two key components: a decoupled tokenizer (DETO) and an autoregressive multilingual generator (AMG). DETO transforms the input pose sequence to a set of discrete tokens using three distinct vector quantized variational autoencoders, each one composed of a motion encoder (E), a motion decoder (D), and a codebook. These components work together to discretize input sign sequences from various body parts. Leveraging a pretrained language model (LM), the AMG can later generate multilingual signs from text prompts with a tailored part-wise decoding strategy.
+                    An overview of our proposed method, Signs as Tokens (SOKE). We begin by training a VQ-VAE-based decoupled tokenizer to map continuous sign motions into discrete tokens for various body parts (upper body, left hand, and right hand). These sign motion tokens are then integrated into the text vocabulary of a pretrained language model, which serves as the backbone of our autoregressive multilingual generator (AMG). Given a text input, the AMG first retrieves word-level signs from external dictionaries, appends their motion tokens to the text tokens, and feeds them into the language model encoder. During decoding, our novel multi-head decoding strategy generates motion tokens for all body parts simultaneously at each time step. Finally, the derived motion tokens are used to reconstruct sign avatars.
                 </p>
             </div>
         </div>
@@ -198,10 +203,10 @@
                     Qualitative Evaluation
                 </h2>
                 <hr style="margin-top:0px">
-                <img src="./qual_csl.png" class="img-responsive" alt="overview"><br>
-                <img src="./qual_h2s.png" class="img-responsive" alt="overview"><br>
+                <img src="./qual_1.png" class="img-responsive" alt="overview"><br>
+                <img src="./qual_2.png" class="img-responsive" alt="overview"><br>
                 <p class="text-justify" style="font-size: 16px;">
-                    Qualitative comparisons of generated signs between our proposed method, SOKE, with the baseline method, <a href="https://arxiv.org/abs/2306.14795">MotionGPT</a>, on CSL-Daily and How2Sign. The results indicate that SOKE can generate finer-grained hand articulations than MotionGPT.</a>
+                    Qualitative comparisons of generated signs between our proposed method, SOKE, with the SOTA method, <a href="https://arxiv.org/abs/2306.14795">S-MotionGPT</a>, on the test sets of How2Sign (left), CSL-Daily (middle), and Phoenix-2014T (right).</a>
                 </p>
             </div>
         </div>
