@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>MaDiS</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../files/bootstrap.min.css">
+    <link rel="stylesheet" href="../files/font-awesome.min.css">
+    <link rel="stylesheet" href="../files/codemirror.min.css">
+    <link rel="stylesheet" href="../files/app.css">
+
+
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h1 class="col-md-20 text-center">
+                <br></br>
+		SEEL: Towards End-to-End 3D Sign Generation with Language Models<br/>
+		<!-- <small> Preprint </small> -->
+            </h1>
+            <hr style="margin-top:0px">
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+					<li>
+                        <a href="https://2000zrl.github.io/" style="font-size: 20px;">
+                            Ronglai Zuo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://fei-ni.github.io/" style="font-size: 20px;">
+                            Fei Ni
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://tomtomtommi.github.io/" style="font-size: 20px;">
+                            Junpeng Jing
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://rolpotamias.github.io/" style="font-size: 20px;">
+                            Rolandos Alexandros Potamias
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://jiankangdeng.github.io/" style="font-size: 20px;">
+                            Jiankang Deng
+                        </a>
+                    </li>
+					<li>
+                        <a href="https://scholar.google.com/citations?user=QKOH5iYAAAAJ" style="font-size: 20px;">
+                            Stefanos Zafeiriou
+                        </a>
+                    </li>
+                    <a></a>
+					<br></br>
+						<li>
+						<span style="font-size: 20px;">
+                            Imperial College London
+						</span>
+                        </li>
+						<!-- <li>
+                        <sup>2</sup>
+						<span style="font-size: 14px;">
+                             Microsoft Research Asia
+						</span> -->
+						<!-- <li>
+                        <sup>3</sup>
+						<span span style="font-size: 14px;">
+                            Tsinghua Unviersity
+						</span> -->
+                    <!-- </li> -->
+					<!-- <br><br> -->
+                <!-- <li>
+				<sup></sup>*:
+				<span span style="font-size: 14px;">
+					Equal contribution
+				</span>
+				</li> -->
+				<!-- <li>
+				<sup>&diams;</sup>:
+				<span span style="font-size: 14px;">
+					 Corresponding author
+				</span>
+				<li> -->
+                </ul>
+            </div>
+        </div>
+	
+		<div class="row">
+		<div class="col-md-12 text-center">
+<!-- 			<a href="https://arxiv.org/abs/2206.07255" target="blank"><span style="text-decoration:underline;font-size:20px">arXiv:2206.07255</span></a> -->
+		</div>
+		</div>
+
+   
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://arxiv.org/pdf/XXX">
+                            <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://2000zrl.github.io/seel/">
+                            <h4><strong>Code (Upon Publication)</strong></h4>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="https://2000zrl.github.io/seel/">
+                            <h4><strong>Models</strong></h4>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+
+        
+
+<!--         <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Video
+                </h2>
+                <hr style="margin-top:0px">
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe src="https://www.youtube.com/embed/Uqzs4uN6v8M" allowfullscreen=""
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+		
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <hr style="margin-top:0px">
+                <img src="./teaser.png" class="img-responsive" alt="overview"><br>
+                <p class="text-justify" style="font-size: 16px;">
+                    <strong style="font-size: inherit;">Paradigms of 3D Sign Language Generation.</strong>
+(a) Two-stage training isolates the frozen tokenizer (encoder <em>E</em> and decoder <em>D</em>) from generation feedback and supervises the generator <em>G</em> with one-hot token targets.
+(b) Na\"ive end-to-end training relies on straight-through estimators (STE), suffering from biased gradients and codebook collapse.
+(c) SEEL decomposes generated-motion supervision via two complementary mechanisms, bypassing STE across both <em>E</em>-to-<em>G</em> and <em>G</em>-to-<em>D</em> interfaces.
+(d) Both the generation and reconstruction performance are improved over the previous SOTA LM-based method on three benchmarks.
+                </p>
+            </div>
+        </div>
+
+		<div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+			<!--
+                <a>
+                    <video style="width:100%;height:100%;" playsinline autoplay loop preload muted>
+                        <source src="./files/teaser.mp4" type="video/mp4">
+                    </video>
+                </a>
+			-->
+                <br></br>
+			
+                <h2>
+                    Abstract
+                </h2>
+                <hr style="margin-top:0px">
+                <p class="text-justify" style="font-size: 16px;">
+                    3D sign language generation aims to produce signing motion from written text. Motivated by the linguistic nature of sign language, recent methods combine a motion tokenizer with a language model to predict motion tokens from text. However, both components are optimized through a two-stage pipeline with mismatched objectives: the tokenizer minimizes reconstruction error in isolation, while the generator learns from rigid one-hot reference tokens. A straightforward end-to-end extension bridges discrete token selection with straight-through estimators (STE), suffering from biased gradients and codebook collapse. To address these limitations, we propose SEEL, an end-to-end framework that aligns tokenization and generation with motion quality through two complementary mechanisms. First, to overcome rigid one-hot supervision, reconstruction-aware generation decodes candidate tokens in context and converts their 3D motion errors into soft targets, guiding the generator with physical motion quality. Second, to propagate generation feedback without STE, generation-aware tokenization passes continuous codebook expectations through the frozen generator, routing generated-motion gradients to the tokenizer to prevent codebook collapse. Combining both mechanisms enables the tokenizer and generator to co-evolve, achieving state-of-the-art performance on CSL-Daily, How2Sign, and Phoenix-2014T.
+                </p>
+            </div>
+        </div>
+		
+		<div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Method Overview
+                </h2>
+                <hr style="margin-top:0px">
+                <img src="./overview.png" class="img-responsive" alt="overview"><br>
+                <p class="text-justify" style="font-size: 16px;">
+                    <strong style="font-size: inherit;">Overview of SEEL.</strong>
+<strong style="font-size: inherit;">Tokenization (Left):</strong> The motion encoder maps sign motion to latent features, which are quantized into discrete reference tokens and decoded to reconstruct the motion.
+<strong style="font-size: inherit;">REG (Top):</strong> Given text and discrete contexts, the generator predicts token distributions at masked positions. Substituting candidate tokens and decoding them in context yields motion errors, which are converted into soft targets to guide generator training.
+<strong style="font-size: inherit;">GET (Bottom):</strong> Soft codebook assignments provide continuous context embeddings to the frozen generator. Its predictions form expected code embeddings, which are decoded into generated motion to train the encoder without STE.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Qualitative Evaluation
+                </h2>
+                <hr style="margin-top:0px">
+                <img src="./qual_res.png" class="img-responsive" alt="overview"><br>
+                <!-- <img src="./qual_2.png" class="img-responsive" alt="overview"><br> -->
+                <p class="text-justify" style="font-size: 16px;">
+                    Qualitative comparisons of generated signs between our proposed method, SEEL, and the SOTA methods, <a href="https://arxiv.org/pdf/2603.10446" style="font-size: inherit;">SignSparK</a> and <a href="https://arxiv.org/pdf/2601.19577" style="font-size: inherit;">MaDiS</a>, on the test sets of CSL-Daily (left), How2Sign (middle), and Phoenix-2014T (right).
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+			<br></br>
+                <p class="text-justify" style="font-size: 16px;">
+                    
+                </p>
+                <h2>
+                    Video Demos
+                </h2>
+                <video style="width:100%;height:100%;" playsinline autoplay loop preload controls muted>
+                    <source src="./video_demos_csl.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video style="width:100%;height:100%;" playsinline autoplay loop preload controls muted>
+                    <source src="./video_demos_h2s.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video style="width:100%;height:100%;" playsinline autoplay loop preload controls muted>
+                    <source src="./video_demos_pho.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+		<div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+                <h2>
+                    Acknowledgements
+                </h2>
+                <hr style="margin-top:0px">
+				<p class="text-justify" style="font-size: 16px;">
+                    S. Zafeiriou and part of this research were funded by the EPSRC Project GNOMON (EP/X011364/1) and a Turing AI Fellowship (EP/Z534699/1).
+F. Ni was supported by the European Union's Horizon Europe research and innovation programme under the Marie Skłodowska-Curie grant agreement No. 101282325.
+The authors thank Yuecong Min for coordinating the user study and the anonymous signers who participated in it.
+                </p>
+				<p class="text-justify" style="font-size: 16px;">
+                    The authors acknowledge the use of resources provided by the Isambard-AI National AI Research Resource (AIRR). <a href="https://doi.org/10.48550/arXiv.2410.11199" style="font-size: inherit;">Isambard-AI</a> is operated by the University of Bristol and is funded by the UK Government's Department for Business, Innovation, Science and Trade via UK Research and Innovation; and the Science and Technology Facilities Council [ST/AIRR/I-A-I/1023].
+The authors acknowledge the use of resources provided by the Zenith supercomputer, operated by the University of Cambridge and delivered in partnership with Dell Technologies and AMD. Zenith is funded by UK Research and Innovation (UKRI) under the UK AI Research Resource (AIRR; grant ST/Z000890/1), an initiative of the UK Government's Department for Business, Innovation, Science, and Trade, and the National Compute Resource (NCR; grant UKRI4064) programmes.
+The authors also acknowledge computational resources and support provided by the Imperial College Research Computing Service (DOI: 10.14469/hpc/2232).
+				</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-md-offset-0">
+                <div class="text-center">
+                    <h2>
+                        Citation
+                    </h2>
+                </div>
+                <hr style="margin-top:0px">
+                <div class="form-group col-md-12 col-md-offset-0">
+                    <div class="CodeMirror cm-s-default CodeMirror-wrap" style="font-size: 16px;">
+                        <div
+                            style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 4px; ">
+                            <textarea autocorrect="off" autocapitalize="off" spellcheck="false"
+                                style="position: absolute; padding: 0px; width: 1000px; height: 1em; outline: none;"
+                                tabindex="0"></textarea></div>
+                        <div class="CodeMirror-vscrollbar" cm-not-content="true">
+                            <div style="min-width: 1px; height: 0px;"></div>
+                        </div>
+                        <div class="CodeMirror-hscrollbar" cm-not-content="true">
+                            <div style="height: 100%; min-height: 1px; width: 0px;"></div>
+                        </div>
+                        <div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div>
+                        <div class="CodeMirror-gutter-filler" cm-not-content="true"></div>
+                        <div class="CodeMirror-scroll" tabindex="-1">
+                            <div class="CodeMirror-sizer"
+                                style="margin-left: 0px; margin-bottom: -17px; border-right-width: 13px; min-height: 162px; padding-right: 0px; padding-bottom: 0px;">
+                                <div style="position: relative; top: 0px;">
+                                    <div class="CodeMirror-lines">
+                                        <div style="position: relative; outline: none;">
+                                            <div class="CodeMirror-measure"></div>
+                                            <div class="CodeMirror-measure"></div>
+                                            <div style="position: relative; z-index: 1;"></div>
+                                            <div class="CodeMirror-cursors">
+                                                <div class="CodeMirror-cursor"
+                                                    style="left: 4px; top: 0px; height: 17.1406px;">&nbsp;</div>
+                                            </div>
+                                            <div class="CodeMirror-code" style="">
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;">@article{seel,</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  title={SEEL: Towards End-to-End 3D Sign Generation with Language Models},</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  author={Zuo, Ronglai and Ni, Fei and Jing, Junpeng and Potamias, Rolandos Alexandros and Deng, Jiankang and Zafeiriou, Stefanos},</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  journal={arXiv preprint},</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;"> &nbsp;  year={2026}</span></pre>
+                                                <pre
+                                                    class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="position: absolute; height: 13px; width: 1px; top: 280px;"></div>
+                            <div class="CodeMirror-gutters" style="display: none; height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<div class="row">
+            <div class="col-md-12 col-md-offset-0 text-center">
+                <br></br>
+<!-- 				<h2>
+                    Acknowledgements
+                </h2> -->
+                <hr style="margin-top:0px">
+				
+				<p class="text-justify" style="font-size: 16px;">
+                    Feel free to contact <a href="mailto:r.zuo@imperial.ac.uk" style="font-size: inherit;">Ronglai Zuo</a> if you have any questions. The website template is adapted from <a href="https://yuewuhkust.github.io/AniPortraitGAN/" style="font-size: inherit;">AniPortraitGAN</a>.
+                </p>
+            </div>
+        </div>
+
+        
+<footer class="text-justify">
+    <p style="font-size: 14px; color: #666;">
+        © 2026 SEEL Authors. Except where otherwise noted, the materials
+        on this project website are licensed under the
+        <a rel="license"
+           href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+           target="_blank">
+            Creative Commons Attribution-NonCommercial-NoDerivatives
+            4.0 International License
+        </a>.
+    </p>
+</footer>
+</body>
+
+</html>
+
+
